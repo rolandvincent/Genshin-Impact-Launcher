@@ -1,0 +1,156 @@
+﻿<UserControl x:Class="Genshin_Impact_Launcher.View.ControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Genshin_Impact_Launcher.View"
+             mc:Ignorable="d" 
+             Background="Transparent"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Color x:Key="PrimaryButtonBackgroundColor">#ffc206</Color>
+        <Color x:Key="PrimaryButtonHoverBackgroundColor">#ffcc2b</Color>
+        <Color x:Key="PrimaryButtonPressedBackgroundColor">#f1be29</Color>
+        <Color x:Key="PrimaryButtonForegroundColor">#704a1d</Color>
+        <Color x:Key="SeparatorColor">#f1b325</Color>
+
+        <SolidColorBrush x:Key="PrimaryButtonBackground"
+                         Color="{DynamicResource PrimaryButtonBackgroundColor}" />
+        <SolidColorBrush x:Key="PrimaryButtonHoverBackground"
+                         Color="{DynamicResource PrimaryButtonHoverBackgroundColor}" />
+        <SolidColorBrush x:Key="PrimaryButtonPressedBackground"
+                         Color="{DynamicResource PrimaryButtonPressedBackgroundColor}" />
+        <SolidColorBrush x:Key="PrimaryButtonForeground"
+                         Color="{DynamicResource PrimaryButtonForegroundColor}" />
+        <SolidColorBrush x:Key="ButtonSeparatorBrush"
+                         Color="{DynamicResource SeparatorColor}" />
+
+        <Style TargetType="Button"
+               x:Key="PrimaryButton">
+            <Setter Property="Background"
+                    Value="{DynamicResource PrimaryButtonBackground}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource PrimaryButtonForeground}" />
+            <Setter Property="FontSize"
+                    Value="24" />
+            <Setter Property="Cursor"
+                    Value="Hand" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="{DynamicResource PrimaryButtonHoverBackground}" />
+                </Trigger>
+                <Trigger Property="IsPressed"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="{DynamicResource PrimaryButtonPressedBackground}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button"
+               x:Key="LaunchBtnLeft"
+               BasedOn="{StaticResource PrimaryButton}">
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5 0 0 5"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{DynamicResource ButtonSeparatorBrush}"
+                                BorderThickness="0 0 0.5 0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Content="{Binding Content, RelativeSource={RelativeSource AncestorType=Button, Mode=FindAncestor}}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button"
+               x:Key="LaunchBtnRight"
+               BasedOn="{StaticResource PrimaryButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="0 5 5 0"
+                                Background="{TemplateBinding Background}">
+                            <Path VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                                  StrokeLineJoin="Round"
+                                  StrokeThickness="1.3"
+                                  StrokeStartLineCap="Round"
+                                  StrokeEndLineCap="Round"
+                                  Margin="0 0 0 0"
+                                  Data="M1 0H12M1 4H12M1 8H12" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="120" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1"
+              x:Name="UIControls"
+              Width="200"
+              Height="70"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Top"
+              Margin="0 0 120 0"
+              Panel.ZIndex="100">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="30" />
+            </Grid.ColumnDefinitions>
+            <Button Style="{DynamicResource LaunchBtnLeft}">Launch</Button>
+            <Button x:Name="MenuBtn"
+                    Style="{DynamicResource LaunchBtnRight}"
+                    MouseEnter="MenuBtn_MouseEnter"
+                    MouseLeave="MenuBtn_MouseLeave"
+                    Grid.Column="1"
+                    Content="Launch">
+            </Button>
+            <Popup Name="myPopup"
+                   IsOpen="False"
+                   Placement="Top"
+                   AllowsTransparency="True"
+                   PlacementTarget="{Binding ElementName=MenuBtn}"
+                   HorizontalOffset="-140"
+                   VerticalOffset="-15"
+                   PopupAnimation="Fade">
+                <Border Background="#FFF"
+                        CornerRadius="5"
+                        Padding="10"
+                        VerticalAlignment="Center"
+                        Margin="0 0 0 10"
+                        HorizontalAlignment="Center">
+                    <Grid>
+                        <TextBlock FontFamily="Bahnscrift"
+                                   Foreground="#8a919a">Game Local Files Management
+                        </TextBlock>
+                        <Rectangle Fill="White"
+                                   VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Right"
+                                   Height="20"
+                                   Width="20"
+                                   Panel.ZIndex="-1"
+                                   Margin="0 0 0 -10">
+                            <Rectangle.RenderTransform>
+                                <RotateTransform Angle="45" />
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                    </Grid>
+
+                </Border>
+            </Popup>
+
+        </Grid>
+        
+    </Grid>
+</UserControl>
