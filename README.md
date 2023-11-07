@@ -17,4 +17,5 @@ Fitur yang akan dibuat antara lain
 
 # Screenshoots
 
-![Launcher GUI](https://github.com/rolandvincent/Genshin-Impact-Launcher/assets/52077393/379c9db2-3c5e-4a30-bd27-64bf35f05327)
+https://github.com/rolandvincent/Genshin-Impact-Launcher/assets/52077393/b5772a29-2093-4b24-83a8-bfb52932cdeb
+
